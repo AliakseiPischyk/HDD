@@ -3,7 +3,6 @@
 #include <conio.h>
 #include <atlstr.h>
 
-#include "Standarts.h"
 
 using namespace std;
 
@@ -87,8 +86,6 @@ int main() {
 	//Specifies an enumerator value of type STORAGE_BUS_TYPE that indicates the type of bus to which the device is connected.
 	//This should be used to interpret the raw device properties at the end of this structure (if any).
 	const auto BusType = (char*)busType[pDeviceDescriptor->BusType];
-	Standarts standarts;
-	standarts.getSupportedInterfaces(hDevice);
 
 	cout<<endl<<
 		"If the device has no vendor ID, this member is zero" << endl <<
@@ -101,28 +98,6 @@ int main() {
 		SerialNumber << endl <<
 		"Interface" << endl <<
 		BusType << endl << endl;
-
-
-	cout << "ATA Support:   ";
-	for (int i = 8; i >= 4; i--) {
-		if (standarts.ata.support[i] == 1)
-			cout << "ATA" << i << " | ";
-	}
-	cout << endl;
-
-	cout << "DMA Support:   ";
-	for (int i = 0; i < 8; i++) {
-		if (standarts.dma.support[i] == 1)
-			cout << "DMA" << i << " | ";
-	}
-	cout << endl;
-
-	cout << "PIO Support:   ";
-	for (int i = 0; i < 2; i++) {
-		if (standarts.pio.support[i] == 1)
-			cout << "PIO" << i + 3 << " | ";
-	}
-	cout << endl;
 
 
 	delete[]pOutBuffer;
